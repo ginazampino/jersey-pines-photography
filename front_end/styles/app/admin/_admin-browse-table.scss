@@ -1,0 +1,93 @@
+// Add-new-image button.
+.admin-add {
+    @include display-flex;
+    @include align-items(center);
+    @include justify-content(center);
+    background-color: $color-dark-gray;
+    border: 1px solid transparent;
+    border-radius: $border-radius-default;
+    font-size: $font-size-small;
+    font-weight: $font-weight-light;
+    height: 60px;
+    letter-spacing: $letter-spacing-large;
+    text-transform: uppercase;
+    transition: .45s ease-in;
+    &:hover {
+        background-color: transparent;
+        border: 1px solid $color-dark-gray;
+        color: rgba($color-gray, .55);
+        cursor: pointer;
+        letter-spacing: $letter-spacing-hover;
+        transition: .45s ease-out;
+    }
+}
+
+// Table of uploaded images.
+.admin-table {
+    margin-top: 40px;
+    li {
+        @include display-flex;
+        @include align-items(center);
+        border-radius: $border-radius-default;
+        color: $color-gray;
+        position: relative;
+        height: 60px;
+        transition: .45s ease-in;
+    }
+    .backdrop {
+        background-position: center;
+        background-size: cover;
+        opacity: 0.15;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+    }
+    li + li {
+        margin-top: 20px;
+    }
+    div + div {
+        margin-left: 40px;
+    }
+    li:hover {
+        .backdrop {
+            opacity: 0.1;
+            transition: .45s ease-out;
+        }
+    }
+}
+
+// Admin image table row content.
+.table-thumb {
+    background-position: center;
+    background-size: cover;
+    border-radius: $border-radius-default;
+    height: 60px;
+    min-width: 60px;
+}
+
+.table-title {
+    flex: 1;
+    transition: .45s ease-in;
+}
+
+.table-action {
+    @include display-flex;
+    @include align-items(center);
+    @include justify-content(center);
+    background-color: $color-dark-gray;
+    border-radius: $border-radius-default;
+    height: 60px;
+    max-width: 60px;
+}
+
+.admin-button,
+.admin-browse-button {
+    background-color: $color-dark-gray;
+}
+
+.admin-button {
+    width: 60px;   
+}

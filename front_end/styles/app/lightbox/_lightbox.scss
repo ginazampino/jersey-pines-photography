@@ -1,0 +1,56 @@
+.lightbox-container {
+    background-position: center;
+    background-size: cover;
+    border: 25px solid $color-black;
+    position: absolute;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    z-index: 9999;
+}
+
+.lightbox {
+    @include align-items(center);
+    @include display-flex;
+    @include justify-content(center);
+    background-color: rgba($color-black, .75);
+    height: 100%;
+    width: 100%;
+}
+
+.lightbox-image {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.lightbox-button {
+    margin: 25px;
+    position: absolute;
+    right: 0;
+}
+
+.lightbox-details {
+    background-color: $color-black;
+    position: absolute;
+    bottom: 0;
+    margin: 25px;
+    padding: 25px;
+}
+
+.lightbox-details-title {
+    font-size: $font-size-normal;
+    margin-bottom: 5px;
+}
+
+.lightbox-details-locdate {
+    color: rgba($color-gray, .75);
+    font-size: $font-size-small;
+    margin-bottom: 10px;
+}
+
+.lightbox-details-note {
+    color: rgba($color-gray, .55);
+    font-size: $font-size-small;
+    font-style: oblique;
+}

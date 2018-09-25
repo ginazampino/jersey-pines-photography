@@ -1,0 +1,59 @@
+// Outermost admin element.
+.admin-content-container { 
+    height: 100vh;
+    width: 100%;
+}
+
+// Contains all scrollable content (below).
+.scroll-area { 
+    height: 100%;
+    overflow: auto;
+}
+
+.admin {
+    padding: 0 100px 100px 100px;
+    height: 100%;
+}
+
+// Sign-out button.
+.admin-sign-out-container {
+    padding: 35px;
+}
+
+.admin-sign-out {
+    color: $color-gray;
+    font-size: $font-size-small;
+    letter-spacing: $letter-spacing-large;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    width: 150px;
+    transition: .45s ease-in;
+    &:hover {
+        color: rgba($color-gray, .55);
+        cursor: pointer;
+        letter-spacing: $letter-spacing-hover;
+        transition: .45s ease-out;
+    }
+}
+
+// Admin feader (headings borrowed from gallery site).
+.admin-header-container {
+    margin: 0 auto;
+    width: 250px;
+}
+
+// Admin footer.
+.admin-footer {
+    @include display-flex;
+    @include align-items(center);
+    @include justify-content(center);
+    font-size: $font-size-small;
+    color: rgba($color-gray, .55);
+    letter-spacing: $letter-spacing-large;
+    text-transform: uppercase;
+    transition: .45s ease-in;
+    i {
+        margin-right: 10px;
+    }
+}

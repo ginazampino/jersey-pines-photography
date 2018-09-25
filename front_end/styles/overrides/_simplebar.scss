@@ -1,0 +1,9 @@
+.simplebar-scrollbar:before {
+    background: $color-white;
+}
+
+.simplebar-track {
+    &.horizontal {
+        display: none;
+    }
+}

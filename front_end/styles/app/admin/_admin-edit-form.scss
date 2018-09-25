@@ -1,0 +1,169 @@
+// Admin Edit Image Upload Element
+.admin-edit-thumbnail {
+    height: 250px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.admin-edit-thumbnail-container {
+    @include display-flex;
+    @include align-items(center);
+    @include justify-content(center);
+    border-radius: $border-radius-default;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    &:hover {
+        .backdrop {
+            opacity: 0.1;
+            transition: .45s ease-out;
+        }
+    }
+}
+
+.backdrop {
+    background-position: center !important;
+    background-size: cover !important;
+    border-radius: $border-radius-default;
+    bottom: 0;
+    display: block;
+    left: 0;
+    opacity: 0.15;
+    position: absolute;  
+    right: 0;
+    top: 0;
+    transition: .45s ease-in;
+    z-index: -1;
+}
+
+.admin-edit-thumbnail {
+    cursor: pointer;
+}
+
+// Admin Text/Date Input Fields (i.e. Name, Date, Location, Note)
+.admin-input-list { // Contains all input element containers, which are <li>s.
+    @include display-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: -10px;
+    margin-top: -20px;
+}
+
+.admin-input-container { // Contains the input element and its label.
+    @include display-flex;
+    @include align-items(center);
+    margin: 10px 0;
+    padding: 10px;
+    &:first-child,
+    &:last-child {
+        width: 100%; 
+     }
+    &:not(:first-child):not(:last-child) {
+        flex: 1;
+   }
+}
+
+.admin-input-label { // The label to the left of the HTML input element.
+    font-size: $font-size-small;
+    letter-spacing: $letter-spacing-large;
+    margin-right: 20px;
+    text-transform: uppercase;
+}
+
+.admin-input { // The HTML input element.
+    border-bottom: 1px solid $color-dark-gray;
+    color: rgba($color-gray, .55);
+    flex: 1;
+    letter-spacing: $letter-spacing-normal;
+    padding: 10px 0;
+    transition: .45s ease-in;
+    margin-bottom: -2px;
+    &:focus {
+        border-bottom: 1px solid $color-white;
+        color: $color-white;
+        transition: .45s ease-out;
+        &:focus:hover {
+            border-bottom: 1px solid $color-white;
+            transition: .45s ease-out;
+        }
+    }
+    &:hover {
+        border-bottom: 1px solid rgba($color-gray, .55);
+        transition: .45s ease-out;
+    }
+}
+
+// Admin Form Buttons (i.e. Delete, Cancel, Submit)
+.admin-button-list { // Contains the admin form buttons.
+    @include display-flex;
+    flex-wrap: wrap;
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    margin-top: 20px;
+    li {
+        flex: 1;
+        padding: 10px;
+        width: 100%;
+    }
+}
+
+.admin-button {
+    border: 1px solid $color-dark-gray;
+    color: $color-light-gray;
+    font-size: $font-size-small;
+    height: 60px;
+    letter-spacing: $letter-spacing-large;
+    padding: 0 40px;
+    text-transform: uppercase;
+    transition: .45s ease-in;
+    width: 100%;
+    &:hover {
+        background-color: transparent;
+        color: rgba($color-gray, .55);
+        cursor: pointer;
+        letter-spacing: $letter-spacing-hover;
+        transition: .45s ease-out;
+    }
+    &:disabled {
+        background-color: #232323 !important;
+        color: $color-light-gray !important;
+        cursor: default !important;
+        letter-spacing: $letter-spacing-large;
+        opacity: 0.33;
+        transition: .45s ease-out;
+    }
+}
+
+div {
+    &.admin-button {
+        @include display-flex;
+        @include align-items(center);
+        @include justify-content(center);
+    }
+}
+
+// Delete Confirmation
+
+// .delete-confirmation {
+//     @include display-flex;
+//     @include align-items(center);
+//     @include justify-content(center);
+//     background-color: $color-dark-gray;
+//     border: 1px solid $color-dark-gray;
+//     color: $color-light-gray;
+//     font-size: $font-size-small;
+//     height: 60px;
+//     letter-spacing: $letter-spacing-large;
+//     padding: 0 40px;
+//     text-transform: uppercase;
+//     transition: .45s ease-in;
+//     &:hover {
+//         background-color: transparent;
+//         color: rgba($color-gray, .55);
+//         cursor: pointer;
+//         letter-spacing: $letter-spacing-hover;
+//         transition: .45s ease-out;
+//     }
+// }

@@ -1,0 +1,6 @@
+node_modules/
+front_end/images/*
+wwwroot/static_content/fontawesome_pro
+wwwroot/index.html
+wwwroot/main.js
+wwwroot/uploads/*

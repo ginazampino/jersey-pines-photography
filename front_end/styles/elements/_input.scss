@@ -1,0 +1,13 @@
+input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    outline: none;
+}
+
+.unstyled::-webkit-inner-spin-button,
+.unstyled::-webkit-calendar-picker-indicator,
+.unstyled::-webkit-clear-button {
+    display: none;
+    -webkit-appearance: none;
+}

@@ -1,0 +1,71 @@
+.gallery {
+    width: 100%;
+}
+
+.site-gallery-container {
+    overflow: hidden;
+}
+
+.site-gallery {
+    // @include display-grid;
+    // @include grid-template-rows(60px auto);
+    background-color: $color-black;
+    border-radius: $border-radius-default;
+    opacity: 1;
+}
+
+.site-gallery-header {
+    // @include display-grid;
+    // @include grid-template-columns-gap(auto 60px, 10px);
+    @include display-flex;
+    @include flex-wrap(no-wrap);
+    height: 60px;
+}
+
+.site-gallery-header-heading {
+    @include display-flex;
+    @include align-items(center);
+    @include justify-content(flex-start);
+    flex-grow: 1;
+    padding-left: 25px;
+}
+
+.site-gallery-content-container {
+    height: calc(100vh - 260px);
+    padding: 0 24px 25px 25px;
+}
+
+.site-gallery-content-scroll-area {
+    height: 100%;
+    overflow: auto;
+}
+
+// Needs unobscured access to .gallery-item-container divs.
+.site-gallery-content {
+    @include display-grid;
+    grid-auto-rows: minmax(50px, 200px);
+    grid-gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    margin-right: 25px;
+    padding-right: 10px;
+}
+
+.site-gallery-item-container {
+    height: 100%;
+    overflow: hidden;
+    width: 100%
+}
+
+.site-gallery-item {
+    background-position: center;
+    background-size: cover;
+    border-radius: 1.5px;
+    height: 100%;
+    transition: .5s ease-in;
+    width: 100%;
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        transition: .5s ease-out;
+    }
+}

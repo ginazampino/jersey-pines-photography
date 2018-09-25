@@ -1,0 +1,70 @@
+/*
+
+	** REMINDER TO SELF **
+
+    Not supported by IE11:
+
+        repeat()
+        grid-gap
+
+*/
+
+// Display
+@mixin display-grid {
+    display: -ms-grid;
+    display: grid;
+}
+
+@mixin display-inline-grid {
+    display: -ms-inline-grid;
+    display: inline-grid;
+}
+
+@mixin display-subgrid {
+    display: -ms-subgrid;
+    display: subgrid;
+}
+
+// Columns
+@mixin grid-column($value) {
+    -ms-grid-column: $value;
+    grid-column: $value;
+}
+
+@mixin grid-column-span($value) {
+    -ms-grid-column-span: $value;
+    grid-column: span $value;
+}
+
+@mixin grid-template-columns($value) {
+    -ms-grid-columns: $value;
+    grid-template-columns: $value;
+}
+
+@mixin grid-template-columns-gap($value, $gap) {
+    -ms-grid-columns: $value;
+    grid-template-columns: $value;
+    grid-gap: $gap;
+}
+
+// Rows
+@mixin grid-row($value) {
+    -ms-grid-row: $value;
+    grid-row: $value;
+}
+
+@mixin grid-row-span($value) {
+    -ms-grid-row-span: $value;
+    grid-row: span $value;
+}
+
+@mixin grid-template-rows($value) {
+    -ms-grid-rows: $value;
+    grid-template-rows: $value;
+}
+
+@mixin grid-template-rows-gap($value, $gap) {
+    -ms-grid-rows: $value;
+    grid-template-rows: $value;
+    grid-gap: $gap;
+}

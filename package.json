@@ -1,0 +1,49 @@
+{
+  "name": "photosite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "private": true,
+  "scripts": {
+    "server": "nodemon --watch server server/server.js",
+    "build": "webpack --config front_end/webpack.config.js --watch",
+    "build-prod": "cross-env NODE_ENV=production webpack --config front_end/webpack.config.js",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run build\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "concurrently": "^4.0.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "node-sass": "^4.9.3",
+    "nodemon": "^1.18.3",
+    "noty": "^3.2.0-beta",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.22.1",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.4.0",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-history-api-fallback": "^1.5.0",
+    "express": "^4.16.3",
+    "express-fileupload": "^0.4.0",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.0"
+  }
+}

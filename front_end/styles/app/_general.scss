@@ -1,0 +1,42 @@
+.hidden {
+    display: hidden;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+.button {
+  @include display-flex;
+  @include align-items(center);
+  @include justify-content(center);
+  background-color: $color-black;
+  border-radius: $border-radius-default;
+  font-size: $font-size-large;
+  font-weight: $font-weight-light;
+  height: 60px;
+  width: 60px;
+  i {
+      color: rgba($color-gray, .55);
+      transform: scale(1);
+      transition: transform 0.4s ease-out;
+  }
+  &:hover {
+      cursor: pointer;
+      transition: 0.4s ease-in-out;
+      i {
+          color: $color-white;
+          transform: scale(1.5);
+          transition: transform 0.4s ease-in;
+          transition: 0.4s ease-out;
+      }
+  }
+}
