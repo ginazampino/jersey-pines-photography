@@ -1,6 +1,6 @@
 const express = require('express');
 
-module.export = function createAuthenticatedRoutes() {
+module.exports = function createAuthenticatedRoutes() {
     const router = express.Router()
 
     router.post('/api/delete/:id', async function(req, res) {
