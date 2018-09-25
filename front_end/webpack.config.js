@@ -70,7 +70,7 @@ module.exports = {
         alias: {
             '~': __dirname,
             'root': __dirname,
-            'vue': 'vue/dist/vue.js'
+            'vue': 'vue/dist/vue.esm.js'
         },
         extensions: ['.json', '.js', '.css', '.scss']
     }
