@@ -8,8 +8,8 @@ input[type="file"] {
 }
 
 .admin-edit-thumbnail-container {
-    @include display-flex;
     @include align-items(center);
+    @include display-flex;
     @include justify-content(center);
     border-radius: $border-radius-default;
     position: relative;
@@ -52,8 +52,8 @@ input[type="file"] {
 }
 
 .admin-input-container { // Contains the input element and its label.
-    @include display-flex;
     @include align-items(center);
+    @include display-flex;
     margin: 10px 0;
     padding: 10px;
     &:first-child,
@@ -138,32 +138,8 @@ input[type="file"] {
 
 div {
     &.admin-button {
-        @include display-flex;
         @include align-items(center);
+        @include display-flex;
         @include justify-content(center);
     }
 }
-
-// Delete Confirmation
-
-// .delete-confirmation {
-//     @include display-flex;
-//     @include align-items(center);
-//     @include justify-content(center);
-//     background-color: $color-dark-gray;
-//     border: 1px solid $color-dark-gray;
-//     color: $color-light-gray;
-//     font-size: $font-size-small;
-//     height: 60px;
-//     letter-spacing: $letter-spacing-large;
-//     padding: 0 40px;
-//     text-transform: uppercase;
-//     transition: .45s ease-in;
-//     &:hover {
-//         background-color: transparent;
-//         color: rgba($color-gray, .55);
-//         cursor: pointer;
-//         letter-spacing: $letter-spacing-hover;
-//         transition: .45s ease-out;
-//     }
-// }

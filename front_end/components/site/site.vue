@@ -2,11 +2,9 @@
     <div class="site">
         <site-background></site-background>
         <site-navigation></site-navigation>
-        <div class="gallery">
-            <transition name="fade" mode="out-in">
-                <router-view></router-view>
-            </transition>
-        </div>
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 

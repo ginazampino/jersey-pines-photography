@@ -1,6 +1,6 @@
 .site-navigation-container {
-    @include display-flex;
     @include align-items(flex-start);
+    @include display-flex;
     min-width: 275px;
     margin-right: 75px;
 }
@@ -17,8 +17,8 @@
 }
 
 .site-navigation-header {
-    @include display-flex;
     @include align-items(center);
+    @include display-flex;
     @include flex-direction(column);
     @include justify-content(center);
     background-color: $color-black;
@@ -66,7 +66,8 @@
 .site-navigation-social {
     @include display-flex;
     @include flex-direction(row);
-    div + div {
+    margin-top: 30px;
+    div {
         margin-left: 10px;
     }
 }

@@ -43,11 +43,37 @@
     }
 
     .site-navigation-menu {
-        display: none;
+        @include align-items(center);
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(center);
+        @include flex(auto);
+        @include flex-wrap(wrap);
+        padding: 20px 10px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        li {
+            @include align-items(center);
+            @include display-flex;
+            @include flex(auto);
+            @include flex-direction(column);
+            @include flex-wrap(wrap);
+            @include justify-content(center);
+            margin: 10px;
+            padding: 20px 10px;
+            &:hover {
+                letter-spacing: inherit;
+            }
+        }
+        
+        li + li {
+            margin-top: 10px;
+        }
     }
 
     .site-navigation-social {
-        display: none;
+        margin: 0;
     }
 
     .gallery {

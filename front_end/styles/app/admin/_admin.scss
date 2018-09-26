@@ -45,8 +45,8 @@
 
 // Admin footer.
 .admin-footer {
-    @include display-flex;
     @include align-items(center);
+    @include display-flex;
     @include justify-content(center);
     font-size: $font-size-small;
     color: rgba($color-gray, .55);

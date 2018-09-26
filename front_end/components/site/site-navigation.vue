@@ -4,7 +4,6 @@
             <div class="site-navigation-header-container">
                 <header class='site-navigation-header'>
                     <h1>
-                        <!-- Jesse &amp; Gina -->
                         Jersey Pines
                     </h1>
                     <span class="h1-subheading">
@@ -14,27 +13,20 @@
             </div>
             <nav>
                 <ul class="site-navigation-menu">
-                    <router-link
-                        v-for="category in categories"
-                        tag='li'
-                        v-bind:to="'/gallery/' + category.category_name"
-                        v-bind:key="category.id"
-                        v-bind:data-id="category.id"
-                    >{{ category.category_name }}</router-link>
+                    <router-link v-for="category in categories" tag='li' v-bind:to="'/gallery/' + category.category_name" v-bind:key="category.id" v-bind:data-id="category.id">
+                        {{ category.category_name }}
+                    </router-link>
                 </ul>
             </nav>
             <footer>
                 <div class="site-navigation-social">
-                    <div class="button">
-                        <i class="fal fa-envelope"></i>
-                    </div>
+                    <a href="mailto:gina@ginazampino.com?subject=Photography">
+                        <div class="button">
+                            <i class="fal fa-envelope"></i>
+                        </div>
+                    </a>
                     <div class="button">
                         <i class="fab fa-flickr"></i>
-                    </div>
-                </div>
-                <div class="site-navigation-hamburger">
-                    <div class="button">
-                        <i class="fal fa-bars"></i>
                     </div>
                 </div>
             </footer>

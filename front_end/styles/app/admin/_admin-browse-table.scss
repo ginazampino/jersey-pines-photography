@@ -26,8 +26,8 @@
 .admin-table {
     margin-top: 40px;
     li {
-        @include display-flex;
         @include align-items(center);
+        @include display-flex;
         border-radius: $border-radius-default;
         color: $color-gray;
         position: relative;
@@ -74,8 +74,8 @@
 }
 
 .table-action {
-    @include display-flex;
     @include align-items(center);
+    @include display-flex;
     @include justify-content(center);
     background-color: $color-dark-gray;
     border-radius: $border-radius-default;
