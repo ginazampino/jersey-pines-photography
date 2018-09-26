@@ -6,6 +6,8 @@
     .site {
         border: 0;
         padding: 0;
+        height: 100%;
+        width: 100%;
     }
 
     .site-navigation-container {
@@ -133,5 +135,14 @@
 
     .admin {
         padding:  0 20px 40px 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .site-navigation-social {
+        padding-right: 10px;
+        .button {
+            width: 30px;
+        }
     }
 }
