@@ -4,7 +4,8 @@
             <div class="site-navigation-header-container">
                 <header class='site-navigation-header'>
                     <h1>
-                        Jesse &amp; Gina
+                        <!-- Jesse &amp; Gina -->
+                        Jersey Pines
                     </h1>
                     <span class="h1-subheading">
                         Photography

@@ -1,4 +1,7 @@
 const express = require('express');
+const path = require('path');
+const config = require('../config');
+const { Categories, Images } = require('../db.js');
 
 module.exports = function createAuthenticatedRoutes() {
     const router = express.Router()

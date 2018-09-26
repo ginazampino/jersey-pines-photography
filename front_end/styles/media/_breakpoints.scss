@@ -1,11 +1,8 @@
-
 @media (max-width: 1024px) {
-    .site {
-        padding: 25px;
+    .site-gallery-item-container { 
+        width: 50%; 
     }
-}
 
-@media (max-width: 823px) {
     .site {
         border: 0;
         padding: 0;
@@ -26,18 +23,23 @@
         background-color: $color-black;
         width: 100%;
         padding: 10px 0;
+        footer {
+            @include display-flex;
+            @include justify-content(flex-end);
+            text-align: right;
+        }
     }
 
     .site-navigation-header-container {
         @include display-flex;
         @include align-items(flex-start);
         background-color: $color-black;
-        min-width: calc(100% - 60px);
     }
 
     .site-navigation-header {
         height: 60px;
         padding: 0 20px;
+        margin: 0;
     }
 
     .site-navigation-menu {
@@ -49,27 +51,61 @@
     }
 
     .gallery {
-        position: absolute;
-        top: 0;
         bottom: 0;
+        height: 100vh;
+        left: 0;
         margin-top: 60px;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 
-    .site-gallery-container,
+    .site-gallery-container {
+        height: 100% !important;
+    }
+
     .site-gallery {
+        height: 100%;
+        padding-top: 20px;
+    }
+
+    .site-gallery-content-container {
         height: 100%;
     }
 
-    .site-gallery-content {
-        grid-auto-rows: minmax(1px, 200px);
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    .site-gallery-content-scroll-area {
+        height: calc(100% - 125px);
     }
 
     .site-navigation-hamburger {
-        display: block;
+        display: inline-block;
     }
 
     .lightbox-container {
         margin-top: -60px;
+    }
+    
+}
+
+@media (max-width: 850px) { 
+    .admin {
+        padding:  0 40px 40px 40px;
+    }
+}
+
+
+@media (max-width: 1024px) { 
+    .site-gallery-item-container { 
+        width: 50%; 
+    }
+}
+
+@media (max-width: 414px) { 
+    .site-gallery-item-container { 
+        width: 50%; 
+    }   
+
+    .admin {
+        padding:  0 20px 40px 20px;
     }
 }

@@ -1,8 +1,13 @@
 .styled-select {
+    -moz-appearance: none;
     background-color: transparent;
     outline: none;
     border: none;
     option {
         color: $color-black;
     }
+}
+
+select::-ms-expand {
+    display: none;
 }
