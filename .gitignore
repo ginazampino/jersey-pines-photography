@@ -4,3 +4,4 @@ wwwroot/static_content/fontawesome_pro
 wwwroot/index.html
 wwwroot/main.js
 wwwroot/uploads/*
+.sessions/
