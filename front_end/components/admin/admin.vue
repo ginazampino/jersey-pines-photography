@@ -14,7 +14,7 @@
                     <div class="admin-header-container">
                         <div class="site-navigation-header">
                             <h1>
-                                Jersey &amp; Pines
+                                Jersey Pines
                             </h1>
                             <span class="h1-subheading">
                                 Photography
