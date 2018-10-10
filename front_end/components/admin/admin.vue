@@ -40,6 +40,8 @@
     import admin_browse from './admin-browse.vue';
     import admin_edit from './admin-edit.vue';
 
+    import axios from 'axios';
+
     export default {
         components: {
             'admin-browse': admin_browse,

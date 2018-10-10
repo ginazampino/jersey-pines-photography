@@ -1,12 +1,42 @@
 const express = require('express');
 const path = require('path');
+const passport = require('passport');
 const config = require('../config');
 const { Categories, Images } = require('../db.js');
 
 module.exports = function createAuthenticatedRoutes() {
     const router = express.Router()
 
-    router.post('/api/delete/:id', async function(req, res) {
+    router.get('/auth/google/login', passport.authenticate('google', { scope: ['email', 'profile'] }));
+
+    router.get('/auth/google/callback', passport.authenticate('google', {
+        failureRedirect: '/'
+    }), function (req, res) {
+        setTimeout(() => res.redirect('/admin'), 3000);
+    });
+
+    router.get('/auth/profile', function (req, res) {
+        res.json(req.user);
+    });
+
+    router.use(createProtectedArea());
+    return router;
+}
+
+function createProtectedArea() {
+    const router = express.Router();
+
+    function isLoggedIn(req, res, next) {
+        if (req.user) return next();
+        else res.redirect('/');
+    }
+
+    router.use(function (req, res, next) {
+        console.log('>>> user =', req.user);
+        next();
+    });
+
+    router.post('/api/delete/:id', isLoggedIn, async function(req, res) {
         const id = req.params.id;
 
         try {
@@ -22,7 +52,7 @@ module.exports = function createAuthenticatedRoutes() {
         }
     });
 
-    router.post('/api/upload', async function(req, res) {
+    router.post('/api/upload', isLoggedIn, async function(req, res) {
         // const data = req.body;
 
         const files = req.files;

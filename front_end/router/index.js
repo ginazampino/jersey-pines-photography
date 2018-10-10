@@ -1,3 +1,4 @@
+import axios from 'axios';
 import VueRouter from 'vue-router';
 import Vue from 'vue';
 
@@ -34,6 +35,16 @@ export default new VueRouter({
         {
             path: '/admin',
             component: require('../components/admin/admin.vue').default,
+            beforeEnter: (to, from, next) => {
+                axios.get('/auth/profile').then(resp => {
+                    const profile = resp.data;
+                    if (profile) {
+                        next();
+                    } else {
+                        window.location.replace('/auth/google/login');
+                    }
+                })
+            },
             children: [
                 {
                     path: '/',
