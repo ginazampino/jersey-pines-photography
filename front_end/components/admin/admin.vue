@@ -14,7 +14,7 @@
                     <div class="admin-header-container">
                         <div class="site-navigation-header">
                             <h1>
-                                Jesse &amp; Gina
+                                Jersey &amp; Pines
                             </h1>
                             <span class="h1-subheading">
                                 Photography

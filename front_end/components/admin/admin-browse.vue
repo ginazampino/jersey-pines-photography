@@ -6,7 +6,7 @@
         <div class="divider"></div>
         <ul class="admin-table">
             <li v-for="image in images" v-bind:key="image.id">
-                <div class="table-thumb" v-bind:style="{ backgroundImage: 'url(' + '../uploads/' + image.image_url +')'}">
+                <div class="table-thumb" v-bind:style="{ backgroundImage: 'url(' + '/uploads/' + image.image_url +')'}">
                 </div>
                 <div class="table-title">
                     {{ image.image_title }}
@@ -18,8 +18,7 @@
                         </div>
                     </router-link>
                 </div>
-                <div class="backdrop" v-bind:style="{ backgroundImage: 'url(' + '../uploads/' + image.image_url +')'}"
-                ></div>
+                <div class="backdrop" v-bind:style="{ backgroundImage: 'url(' + '/uploads/' + image.image_url +')'}"></div>
             </li>
         </ul>
     </section>           

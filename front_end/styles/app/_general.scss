@@ -2,6 +2,10 @@
     display: hidden;
 }
 
+.no-margin {
+    margin: 0 !important;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;

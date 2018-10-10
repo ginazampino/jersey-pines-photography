@@ -21,7 +21,7 @@
             <footer>
                 <div class="site-navigation-social">
                     <a href="mailto:gina@ginazampino.com?subject=Photography">
-                        <div class="button">
+                        <div class="button no-margin">
                             <i class="fal fa-envelope"></i>
                         </div>
                     </a>
@@ -43,6 +43,7 @@
                 categories: []
             }
         },
+        
         created() {
             const self = this;
             axios.get('/api/categories')
