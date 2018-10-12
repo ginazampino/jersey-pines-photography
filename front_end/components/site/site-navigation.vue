@@ -2,14 +2,18 @@
     <div class="site-navigation-container">
         <div class="site-navigation">
             <div class="site-navigation-header-container">
-                <header class='site-navigation-header'>
-                    <h1>
-                        Jersey Pines
-                    </h1>
-                    <span class="h1-subheading">
-                        Photography
-                    </span>
-                </header>
+                <router-link
+                        to="/admin"
+                    >
+                    <header class='site-navigation-header'>
+                        <h1>
+                            Jersey Pines
+                        </h1>
+                        <span class="h1-subheading">
+                            Photography
+                        </span>
+                    </header>
+                </router-link>
             </div>
             <nav>
                 <ul class="site-navigation-menu">
@@ -21,12 +25,25 @@
             <footer>
                 <div class="site-navigation-social">
                     <a href="mailto:gina@ginazampino.com?subject=Photography">
-                        <div class="button no-margin">
+                        <div class="button no-margin" title="Contact Gina Zampino">
                             <i class="fal fa-envelope"></i>
                         </div>
                     </a>
-                    <div class="button">
-                        <i class="fab fa-flickr"></i>
+                    <div class="button attribution">
+                        <div class="site-navigation-social-button-container">
+                            <div class="attribution-name">
+                                <span class="attribution-details">
+                                    By
+                                </span>
+                                Gina Zampino<span class="attribution-details">.</span>
+                            </div>
+                            <div>
+                                <span class="attribution-details">
+                                    All rights reserved.
+                                </span>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </footer>

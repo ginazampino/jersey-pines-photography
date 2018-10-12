@@ -44,3 +44,23 @@
       }
   }
 }
+
+.button.attribution {
+    color: $color-light-gray;
+    font-size: $font-size-small;
+    width: 100%;
+    text-align: center;
+    &:hover {
+        cursor: default;
+    }
+}
+
+.attribution-name {
+    margin-bottom: 2.5px;
+}
+
+.attribution-details {
+    @include justify-content(center);
+    color: rgba($color-gray, .55);
+
+}

@@ -1,0 +1,44 @@
+.noty_theme__mint.noty_type__alert,
+.noty_theme__mint.noty_type__notification {
+    border: none !important;
+}
+
+.noty_theme__mint.noty_type__alert,
+.noty_theme__mint.noty_type__notification {
+    background-color: $color-dark-gray !important;
+    color: $color-light-gray !important;
+}
+
+.noty_body {
+    font-family: $font-family-body !important;
+    font-size: $font-size-small !important;
+    letter-spacing: $letter-spacing-normal !important;
+}
+
+.btn.btn-success,
+.btn.btn-error {
+    background-color: transparent !important;
+    border: 1px solid rgba($color-gray, .25) !important;
+    color: rgba($color-gray, .55) !important;
+    font-family: $font-family-body !important;
+    font-size: $font-size-small !important;
+    letter-spacing: $letter-spacing-normal !important;
+    padding: 5px !important;
+    width: 50px;
+    transition: 0.4s ease-in !important;
+    &:hover {
+        background-color: $color-black !important;
+        cursor: pointer;
+        color: $color-light-gray !important;
+        transition: 0.4s ease-out !important;
+    }
+}
+
+.btn.btn-error {
+    margin-left: 12px !important;
+}
+
+.noty_theme__mint.noty_type__success,
+.noty_theme__mint.noty_type__error {
+    color: $color-black !important;
+}

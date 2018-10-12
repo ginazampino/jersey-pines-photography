@@ -14,7 +14,7 @@
                     {{ image.image_location }}, {{ image.image_date }}
                 </li>
                 <li class="lightbox-details-note">
-                    {{ image.image_note }}
+                    {{ image.image_note }} All rights reserved.
                 </li>
             </ul>
         </div>

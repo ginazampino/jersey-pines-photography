@@ -5,6 +5,10 @@
     margin-right: 75px;
 }
 
+.site-navigation-header-container {
+    transition: .2s ease-in-out;
+}
+
 .site-navigation {
     @include display-flex;
     @include flex-direction(column);
@@ -67,9 +71,13 @@
     @include display-flex;
     @include flex-direction(row);
     margin-top: 30px;
-    div {
-        margin-left: 10px;
+    a {
+        margin-right: 10px;
     }
+}
+
+.site-navigation-social-button-container {
+    margin: 0;
 }
 
 .site-navigation-hamburger {

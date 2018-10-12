@@ -1,4 +1,5 @@
-@media (max-width: 1024px), (max-height: 720px) {
+@media (max-width: 1024px), 
+(max-height: 720px) {
     .site-gallery-item-container { 
         width: 50%; 
     }
@@ -34,8 +35,11 @@
 
     .site-navigation-header-container {
         @include display-flex;
-        @include align-items(flex-start);
+        @include align-items(center);
+        @include justify-content(center);
         background-color: $color-black;
+        width: 100%;
+        // padding-left: 60px;
     }
 
     .site-navigation-header {
@@ -75,7 +79,13 @@
     }
 
     .site-navigation-social {
-        margin: 0;
+        position: absolute;
+        top: 0;
+        margin: 10px 0;
+    }
+
+    .site-navigation-social-button-container {
+        margin: 0 20px 0 0;
     }
 
     .gallery {
@@ -135,6 +145,18 @@
     }
 }
 
+@media (max-width: 610px) {
+    .site-navigation-header-container {
+        @include display-flex;
+        @include align-items(flex-start);
+        @include justify-content(flex-start);
+        background-color: $color-black;
+        width: 100%;
+        padding-left: 10px;
+        transition: .2s ease-in-out;
+    }
+}
+
 @media (max-width: 414px) { 
     .site-gallery-item-container { 
         width: 50%; 
@@ -142,6 +164,20 @@
 
     .admin {
         padding:  0 20px 40px 20px;
+    }
+
+    .button.attribution {
+        display: none;
+    }
+
+    .site-navigation-header-container {
+        @include display-flex;
+        @include align-items(center);
+        @include justify-content(center);
+        background-color: $color-black;
+        width: 100%;
+        padding-left: 10px;
+        transition: .2s ease-in-out;
     }
 }
 
@@ -157,5 +193,15 @@
 @media (max-width: 320px) {
     .site-navigation-header {
         padding-right: 0;
+    }
+
+    .site-navigation-header-container {
+        @include display-flex;
+        @include align-items(flex-start);
+        @include justify-content(flex-start);
+        background-color: $color-black;
+        width: 100%;
+        padding-left: 10px;
+        transition: .2s ease-in-out;
     }
 }
