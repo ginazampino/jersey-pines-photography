@@ -5,4 +5,4 @@ A responsive Vue.js photography portfolio site designed with cross-browser suppo
 
 ## Notes
 
-My mentor helped dockerize the site, set up a continuous integration service provided by Azure DevOps, deploy the project onto the AWS cloud, and implement Passport. Thank you!
+Thanks to my mentor for helping implement Passport, dockerizing the site, setting up a continuous integration service, and deploying the project onto the AWS cloud!
