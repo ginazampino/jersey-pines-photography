@@ -138,6 +138,12 @@
     }
 }
 
+@media (max-width: 823px) {
+    .lightbox-details {
+        display: none;
+    }
+}
+
 @media (max-width: 748px) {
     .site-background {
         background-position: right;
