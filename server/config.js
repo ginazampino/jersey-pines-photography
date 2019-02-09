@@ -20,5 +20,15 @@ module.exports = {
     server: {
         port: parseInt(process.env.HTTP_PORT || '8111')
     },
+    storage: {
+        accessKeyId: process.env.PHOTOSITE_STORAGE_ACCESSKEY,
+        apiKey: process.env.PHOTOSITE_STORAGE_APIKEY,
+        bucket: process.env.PHOTOSITE_STORAGE_BUCKET,
+        edgeId: process.env.PHOTOSITE_STORAGE_EDGE_ID,
+        edgeUri: process.env.PHOTOSITE_STORAGE_EDGEURI,
+        endpoint: process.env.PHOTOSITE_STORAGE_ENDPOINT,
+        rootPath: process.env.PHOTOSITE_STORAGE_ROOT,
+        secretAccessKey: process.env.PHOTOSITE_STORAGE_SECRETKEY
+    },
     uploadPath: process.env.UPLOAD_DIR || path.resolve(__dirname, '../wwwroot/uploads')
 };

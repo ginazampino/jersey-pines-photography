@@ -43,7 +43,7 @@ module.exports = function (app) {
 
         Images.findOne({
             where: {
-                id: id
+                unique_id: id
             }
         }).then(image => res.send(image));
     });

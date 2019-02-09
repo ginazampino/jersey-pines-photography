@@ -1,8 +1,11 @@
+const axios = require('axios');
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const config = require('../config');
 const { Categories, Images } = require('../db.js');
+
+const uuidV4 = require('uuid/v4');
 
 const ERR_BAD_REQUEST = 400;
 
@@ -60,8 +63,6 @@ module.exports = function createAuthenticatedRoutes() {
         else res.redirect('/');
     };
 
-    router.use(authenticate);
-
     /*
      *  Safe execution guard:
      *  - Generates an express-compatible route handler which
@@ -78,7 +79,8 @@ module.exports = function createAuthenticatedRoutes() {
                     await result;
                 }
             } catch (err) {
-                res.status(500).json({ err });
+                console.error(err);
+                res.status(500).json({ err: err.message });
             }
         };
     };
@@ -88,7 +90,7 @@ module.exports = function createAuthenticatedRoutes() {
      *  - Deletes an image by its ID.
      *  - Authentication required.
      */
-    router.post('/api/delete/:id', safeExecute(async (req, res) => {
+    router.post('/api/delete/:id', authenticate, safeExecute(async (req, res) => {
         const id = req.params.id
 
         if (!id) return res
@@ -107,12 +109,14 @@ module.exports = function createAuthenticatedRoutes() {
      *  - Uploads an image.
      *  - Authentication required.
      */
-    router.post('/api/upload', safeExecute(async (req, res) => {
+    router.post('/api/upload', authenticate, safeExecute(async (req, res) => {
         /* Extract the files out of the multipart request: */
         const files = req.files;
         
         /* Get the first file, if it exists: */
         const file = files && files.file;
+
+        const upload = require('./upload');
 
         /* If "id" is passed on the body, this is an update operation: */
         if (req.body.id) {
@@ -127,21 +131,25 @@ module.exports = function createAuthenticatedRoutes() {
 
             /* Determine if a new image is replacing the previous image: */
             if (file && file.name) {
-                /* Move the file from the temporary dir to the
-                   permanent upload dir. */
-                await uploadFileAsync();
-                update.image_url = file.name;
+                await upload(req.body.id, file.data);
+                await upload.clearCache(req.body.id);
             }
 
             const id = req.body.id;
             const where = {
-                where: { id }
+                where: { unique_id: id }
             };
             await Images.update(update, where);
+
             res.json({ id });
         } else {
             /* This is a create operation: */
-            
+
+            /* Generate a unique identifier to refer to
+               this image, since it doesn't have a primary
+               key yet. */
+            const guid = uuidV4();
+
             /* A file is required for creates: */
             if (!file) {
                 return res
@@ -149,46 +157,23 @@ module.exports = function createAuthenticatedRoutes() {
                     .json({ err: 'A file must be uploaded.' });
             }
 
-            /* Move the file from the temporary dir to the
-               permanent upload dir. */
-            await uploadFileAsync(file);
+            await upload(guid, file.data);
 
             const image = Images.build({
+                unique_id: guid,
                 image_title: req.body.title,
                 image_url: file.name,
                 category_id: req.body.category,
                 image_date: req.body.date,
                 image_location: req.body.location,
-                image_note: req.body.note
+                image_note: req.body.note,
+                image_url: `${config.storage.edgeUri}/${config.storage.rootPath}/${guid}`
             });
 
             await image.save();
-            res.json({ id: image.id });
+            res.json({ id: guid });
         }
     }));
 
     return router;
 }
-
-/**
- * Moves a file asynchronously.
- * @param file The multipart file to move.
- * @param path The absolute path to move to.
- */
-const moveFileAsync = (file, path) => {
-    return new Promise((resolve, reject) => {
-        file.mv(path, err => {
-            if (err) reject(err);
-            else resolve(true);
-        });
-    });
-};
-
-/**
- * Moves a file to the upload directory asynchronously.
- * @param file The multipart file to upload.
- */
-const uploadFileAsync = async (file) => {
-    const outputFileName = path.join(config.uploadPath, file.name);
-    await moveFileAsync(file, outputFileName);
-};

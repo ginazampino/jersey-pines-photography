@@ -98,7 +98,7 @@
                         self.location = response.data.image_location;
                         self.note = response.data.image_note;
 
-                        self.thumbnailURL = '/uploads/' + self.url;
+                        self.thumbnailURL = response.data.image_url + '/sm.jpg';
                     }).catch(function(error) {
                         console.log(error);
                     });

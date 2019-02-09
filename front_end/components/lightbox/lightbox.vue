@@ -1,5 +1,5 @@
 <template>
-    <div class="lightbox-container" v-bind:style="{ backgroundImage: 'url(' + '/uploads/' + image.image_url +')'}">
+    <div class="lightbox-container" v-bind:style="{ backgroundImage: 'url(' + image.image_url + '/lg.jpg)'}">
         <div class="lightbox-button">
             <router-link tag="div" class="button" v-bind:to="'/gallery/' + $route.params.name">
                 <i class="fal fa-times"></i>
@@ -19,7 +19,7 @@
             </ul>
         </div>
         <div class="lightbox">
-            <img class="lightbox-image" v-bind:src="'/uploads/' + image.image_url">
+            <img class="lightbox-image" v-bind:src="image.image_url + '/lg.jpg'">
         </div>
     </div>
 </template>

@@ -31,7 +31,8 @@ const Images = sequelize.define('images', {
     image_title: Sequelize.STRING(255),
     image_date: Sequelize.DATE,
     image_location: Sequelize.STRING(255),
-    image_note: Sequelize.STRING(1000)
+    image_note: Sequelize.STRING(1000),
+    unique_id: Sequelize.STRING(255)
 });
 
 Categories.hasMany(Images, {foreignKey: 'category_id'});

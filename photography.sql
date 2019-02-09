@@ -15,6 +15,7 @@ CREATE TABLE categories (
 
 CREATE TABLE images (
     id                      INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    unique_id               VARCHAR(255) NOT NULL,
     category_id             INT NOT NULL,
     image_url               VARCHAR(255) NOT NULL,
     image_title             VARCHAR(255) NOT NULL,

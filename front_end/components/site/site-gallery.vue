@@ -16,7 +16,7 @@
                     <div class="site-gallery-content-scroll-area" data-simplebar>
                         <div class="site-gallery-content">
                             <router-link v-for="image in images" v-bind:key="image.id" tag="div" class="site-gallery-item-container" v-bind:to="'/gallery/' + $route.params.name + '/image/' + image.id">
-                            <div class="site-gallery-item" v-bind:style="{ backgroundImage: 'url(' + '/uploads/' + image.image_url +')'}"></div>
+                            <div class="site-gallery-item" v-bind:style="{ backgroundImage: 'url(' + image.image_url + '/md.jpg)'}"></div>
                             </router-link>
                         </div>
                     </div>
