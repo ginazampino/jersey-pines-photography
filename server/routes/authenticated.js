@@ -24,7 +24,8 @@ module.exports = function createAuthenticatedRoutes() {
      */
     const backchannel = passport.authenticate(
         'google',
-        { failureRedirect: '/' },
+        { failureRedirect: '/' });
+    router.get('/auth/google/callback', backchannel,
         (req, res) => {
             /* 
                 Redirecting immediately to the authenticated section
@@ -39,7 +40,6 @@ module.exports = function createAuthenticatedRoutes() {
             */
             setTimeout(() => res.redirect('/admin'), 3000);
         });
-    router.get('/auth/google/callback', backchannel);
 
     /*
      *  User profile route:
