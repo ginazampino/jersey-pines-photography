@@ -1,6 +1,6 @@
-drop schema `photosite`;
-create schema `photosite`;
-use `photosite`;
+-- drop schema `photosite`;
+-- create schema `photosite`;
+-- use `photosite`;
 
 CREATE TABLE users (
     id                      INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

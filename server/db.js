@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const { mysql } = require('./config');
+const Sequelize = require('sequelize')
+const { mysql } = require('./config')
 
 const sequelize = new Sequelize(mysql.database, mysql.username, mysql.password, {
     host: mysql.host,
@@ -14,16 +14,16 @@ const sequelize = new Sequelize(mysql.database, mysql.username, mysql.password, 
     define: {
         timestamps: false
     }
-});
+})
 
 const Users = sequelize.define('users', {
     login_provider: Sequelize.STRING,
-    login_provider_id: Sequelize.STRING,
-});
+    login_provider_id: Sequelize.STRING
+})
 
 const Categories = sequelize.define('categories', {
     category_name: Sequelize.STRING
-});
+})
 
 const Images = sequelize.define('images', {
     category_id: { type: Sequelize.INTEGER, unique: true, allowNull: false },
@@ -33,21 +33,25 @@ const Images = sequelize.define('images', {
     image_location: Sequelize.STRING(255),
     image_note: Sequelize.STRING(1000),
     unique_id: Sequelize.STRING(255)
-});
+})
 
-Categories.hasMany(Images, {foreignKey: 'category_id'});
-Images.belongsTo(Categories, {foreignKey: 'category_id'});
+Categories.hasMany(Images, { foreignKey: 'category_id' })
+Images.belongsTo(Categories, { foreignKey: 'category_id' })
 
-sequelize.authenticate().then(() => {
-    console.log('Connection has been established.');
-}).catch(err => {
-    console.error('Unable to establish connection:', err);
-});
-
+var connectionPromise = sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established.');
+        return sequelize;
+    })
+    .catch(err => {
+        console.error('Unable to establish connection:', err);
+    });
 
 module.exports = {
+    connect: connectionPromise,
     sequelize: sequelize,
     Users,
     Categories,
     Images
-};
+}
