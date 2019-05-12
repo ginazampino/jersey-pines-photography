@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const { mysql } = require('./config')
+const Sequelize = require('sequelize');
+const { mysql } = require('./config');
 
 const sequelize = new Sequelize(mysql.database, mysql.username, mysql.password, {
     host: mysql.host,
@@ -14,16 +14,16 @@ const sequelize = new Sequelize(mysql.database, mysql.username, mysql.password, 
     define: {
         timestamps: false
     }
-})
+});
 
 const Users = sequelize.define('users', {
     login_provider: Sequelize.STRING,
     login_provider_id: Sequelize.STRING
-})
+});
 
 const Categories = sequelize.define('categories', {
     category_name: Sequelize.STRING
-})
+});
 
 const Images = sequelize.define('images', {
     category_id: { type: Sequelize.INTEGER, unique: true, allowNull: false },
@@ -33,10 +33,19 @@ const Images = sequelize.define('images', {
     image_location: Sequelize.STRING(255),
     image_note: Sequelize.STRING(1000),
     unique_id: Sequelize.STRING(255)
-})
+});
 
-Categories.hasMany(Images, { foreignKey: 'category_id' })
-Images.belongsTo(Categories, { foreignKey: 'category_id' })
+const ImageExifs = sequelize.define('image_exif', {
+    image_id: { type: Sequelize.INTEGER, primaryKey: true },
+    exif_key: { type: Sequelize.STRING(80), primaryKey: true },
+    exif_value: { type: Sequelize.STRING(255) }
+});
+
+Categories.hasMany(Images, { foreignKey: 'category_id' });
+Images.belongsTo(Categories, { foreignKey: 'category_id' });
+
+Images.hasMany(ImageExifs, { foreignKey: 'image_id' });
+ImageExifs.belongsTo(Images, { foreignKey: 'image_id' });
 
 var connectionPromise = sequelize
     .authenticate()
@@ -53,5 +62,6 @@ module.exports = {
     sequelize: sequelize,
     Users,
     Categories,
-    Images
-}
+    Images,
+    ImageExifs
+};

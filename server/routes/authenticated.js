@@ -3,14 +3,14 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const config = require('../config');
-const { Categories, Images } = require('../db.js');
+const { Categories, Images, ImageExifs } = require('../db.js');
 
 const uuidV4 = require('uuid/v4');
 
 const ERR_BAD_REQUEST = 400;
 
 module.exports = function createAuthenticatedRoutes() {
-    const router = express.Router()
+    const router = express.Router();
 
     /*
      *  Passport.js authentication route:
@@ -25,12 +25,9 @@ module.exports = function createAuthenticatedRoutes() {
      *  Passport.js authentication callback route:
      *  - Receives OAuth 2.0 redirect and performs backchannel auth.
      */
-    const backchannel = passport.authenticate(
-        'google',
-        { failureRedirect: '/' });
-    router.get('/auth/google/callback', backchannel,
-        (req, res) => {
-            /* 
+    const backchannel = passport.authenticate('google', { failureRedirect: '/' });
+    router.get('/auth/google/callback', backchannel, (req, res) => {
+        /* 
                 Redirecting immediately to the authenticated section
                 will cause the page to occasionally load before the
                 express session driver has stored the user token.
@@ -41,8 +38,8 @@ module.exports = function createAuthenticatedRoutes() {
                 I should probably change out the session handler for
                 a more reliable alternative in the future.
             */
-            setTimeout(() => res.redirect('/admin'), 3000);
-        });
+        setTimeout(() => res.redirect('/admin'), 3000);
+    });
 
     /*
      *  User profile route:
@@ -90,90 +87,129 @@ module.exports = function createAuthenticatedRoutes() {
      *  - Deletes an image by its ID.
      *  - Authentication required.
      */
-    router.post('/api/delete/:id', authenticate, safeExecute(async (req, res) => {
-        const id = req.params.id
+    router.post(
+        '/api/delete/:id',
+        authenticate,
+        safeExecute(async (req, res) => {
+            const id = req.params.id;
 
-        if (!id) return res
-            .status(ERR_BAD_REQUEST)
-            .json({ err: 'id is required.' });
+            if (!id) return res.status(ERR_BAD_REQUEST).json({ err: 'id is required.' });
 
-        await Images.destroy({
-            where: { id }
-        });
+            await Images.destroy({
+                where: { id }
+            });
 
-        res.json({ });
-    }));
+            res.json({});
+        })
+    );
 
     /*
      *  Upload image route:
      *  - Uploads an image.
      *  - Authentication required.
      */
-    router.post('/api/upload', authenticate, safeExecute(async (req, res) => {
-        /* Extract the files out of the multipart request: */
-        const files = req.files;
-        
-        /* Get the first file, if it exists: */
-        const file = files && files.file;
+    router.post(
+        '/api/upload',
+        authenticate,
+        safeExecute(async (req, res) => {
+            /* Extract the files out of the multipart request: */
+            const files = req.files;
 
-        const upload = require('./upload');
+            /* Get the first file, if it exists: */
+            const file = files && files.file;
 
-        /* If "id" is passed on the body, this is an update operation: */
-        if (req.body.id) {
-            /* This is an update operation: */
-            const update = {
-                image_title: req.body.title,
-                category_id: req.body.category,
-                image_date: req.body.date,
-                image_location: req.body.location,
-                image_note: req.body.note
-            };
+            const exif = require('./exif');
+            const upload = require('./upload');
 
-            /* Determine if a new image is replacing the previous image: */
-            if (file && file.name) {
-                await upload(req.body.id, file.data);
-                await upload.clearCache(req.body.id);
+            /* If "id" is passed on the body, this is an update operation: */
+            if (req.body.id) {
+                /* This is an update operation: */
+                const update = {
+                    image_title: req.body.title,
+                    category_id: req.body.category,
+                    image_date: req.body.date,
+                    image_location: req.body.location,
+                    image_note: req.body.note
+                };
+
+                /* Determine if a new image is replacing the previous image: */
+                if (file && file.name) {
+                    await upload(req.body.id, file.data);
+                    await upload.clearCache(req.body.id);
+
+                    const exifData = await exif(file.data);
+                    await createOrUpdateExifData(await getImageIdByUniqueId(req.body.id), exifData);
+                }
+
+                const id = req.body.id;
+                const where = {
+                    where: { unique_id: id }
+                };
+                await Images.update(update, where);
+
+                res.json({ id });
+            } else {
+                /* This is a create operation: */
+
+                /*
+                    Generate a unique identifier to refer to
+                    this image, since it doesn't have a primary
+                    key yet. 
+                */
+                const guid = uuidV4();
+
+                /* A file is required for creates: */
+                if (!file) {
+                    return res.status(ERR_BAD_REQUEST).json({ err: 'A file must be uploaded.' });
+                }
+
+                await upload(guid, file.data);
+
+                const image = Images.build({
+                    unique_id: guid,
+                    image_title: req.body.title,
+                    image_url: file.name,
+                    category_id: req.body.category,
+                    image_date: req.body.date,
+                    image_location: req.body.location,
+                    image_note: req.body.note,
+                    image_url: `${config.storage.edgeUri}/${config.storage.rootPath}/${guid}`
+                });
+
+                await image.save();
+
+                const exifData = await exif(file.data);
+                await createOrUpdateExifData(image.id, exifData);
+
+                res.json({ id: guid });
             }
-
-            const id = req.body.id;
-            const where = {
-                where: { unique_id: id }
-            };
-            await Images.update(update, where);
-
-            res.json({ id });
-        } else {
-            /* This is a create operation: */
-
-            /* Generate a unique identifier to refer to
-               this image, since it doesn't have a primary
-               key yet. */
-            const guid = uuidV4();
-
-            /* A file is required for creates: */
-            if (!file) {
-                return res
-                    .status(ERR_BAD_REQUEST)
-                    .json({ err: 'A file must be uploaded.' });
-            }
-
-            await upload(guid, file.data);
-
-            const image = Images.build({
-                unique_id: guid,
-                image_title: req.body.title,
-                image_url: file.name,
-                category_id: req.body.category,
-                image_date: req.body.date,
-                image_location: req.body.location,
-                image_note: req.body.note,
-                image_url: `${config.storage.edgeUri}/${config.storage.rootPath}/${guid}`
-            });
-
-            await image.save();
-            res.json({ id: guid });
-        }
-    }));
+        })
+    );
 
     return router;
+};
+
+async function createOrUpdateExifData(imageId, exifData) {
+    await ImageExifs.destroy({
+        where: {
+            image_id: imageId
+        }
+    });
+    const promises = Object.keys(exifData).map(async key =>
+        ImageExifs.build({
+            image_id: imageId,
+            exif_key: key,
+            exif_value: JSON.stringify(exifData[key]) || 'null'
+        }).save()
+    );
+    await Promise.all(promises);
+}
+
+async function getImageIdByUniqueId(uniqueId) {
+    const image = await Images.findOne({
+        where: {
+            unique_id: uniqueId
+        }
+    });
+    return image && image.id;
 }

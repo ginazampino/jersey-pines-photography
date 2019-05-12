@@ -1,4 +1,5 @@
 const path = require('path');
+require('dotenv').config();
 
 module.exports = {
     mysql: {
@@ -8,10 +9,7 @@ module.exports = {
         password: process.env.MYSQL_PASSWORD || ''
     },
     oauth: {
-        authorizedEmails: [
-            'jesse.colin.hallam@gmail.com',
-            'zampino.gina@gmail.com'
-        ],
+        authorizedEmails: ['jesse.colin.hallam@gmail.com', 'zampino.gina@gmail.com'],
         clientId: process.env.PHOTOSITE_OAUTH_CLIENT_ID,
         clientSecret: process.env.PHOTOSITE_OAUTH_CLIENT_SECRET,
         redirectUrl: process.env.PHOTOSITE_OAUTH_REDIRECT_URL

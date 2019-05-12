@@ -1,6 +1,6 @@
 -- drop schema `photosite`;
--- create schema `photosite`;
--- use `photosite`;
+create schema `photosite`;
+use `photosite`;
 
 CREATE TABLE users (
     id                      INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -22,6 +22,14 @@ CREATE TABLE images (
     image_date              DATE NOT NULL,
     image_location          VARCHAR(255) NOT NULL,
     image_note              VARCHAR(1000) NOT NULL
+);
+
+CREATE TABLE image_exifs (
+    image_id                INT NOT NULL,
+    exif_key                VARCHAR(80) NOT NULL,
+    exif_value              VARCHAR(4000) NOT NULL,
+    PRIMARY KEY (image_id, exif_key),
+    FOREIGN KEY (image_id) REFERENCES images (id)
 );
 
 INSERT INTO categories (category_name)

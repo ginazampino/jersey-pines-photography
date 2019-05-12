@@ -5,3 +5,4 @@ wwwroot/index.html
 wwwroot/main.js
 wwwroot/uploads/*
 .sessions/
+.env

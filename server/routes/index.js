@@ -1,18 +1,18 @@
 const path = require('path');
-const { Categories, Images } = require('../db.js');
+const { Categories, Images, ImageExifs } = require('../db.js');
+const { Op } = require('sequelize');
 
 const config = require('../config');
 
-module.exports = function (app) {
+module.exports = function(app) {
     const index = path.resolve(__dirname, '../../wwwroot/index.html');
 
-    app.get('/', function (req, res) {
+    app.get('/', function(req, res) {
         res.sendFile(index);
     });
 
-    app.get('/api/categories', function (req, res) {
-        Categories.findAll({})
-        .then(categories => res.json(categories))
+    app.get('/api/categories', function(req, res) {
+        Categories.findAll({}).then(categories => res.json(categories));
     });
 
     app.get('/api/gallery/:galleryName', function(req, res) {
@@ -20,11 +20,12 @@ module.exports = function (app) {
 
         Images.findAll({
             raw: true,
-            include: [{
-                model: Categories,
-                where: { category_name: galleryName }
-                
-            }]
+            include: [
+                {
+                    model: Categories,
+                    where: { category_name: galleryName }
+                }
+            ]
         }).then(results => res.json(results));
     });
 
@@ -32,10 +33,27 @@ module.exports = function (app) {
         const id = req.params.id;
 
         Images.findOne({
+            raw: true,
             where: {
                 id: id
             }
-        }).then(image => res.send(image));
+        })
+            .then(async image => {
+                const exifRows = await ImageExifs.findAll({
+                    where: {
+                        image_id: image.id,
+                        exif_key: {
+                            [Op.not]: 'source_data'
+                        }
+                    }
+                });
+                image.exif = exifRows.reduce((total, next) => {
+                    total[next.exif_key] = JSON.parse(next.exif_value);
+                    return total;
+                }, {});
+                return image;
+            })
+            .then(image => res.send(image));
     });
 
     app.get('/api/images/:id', function(req, res) {
@@ -51,9 +69,7 @@ module.exports = function (app) {
     app.get('/api/browse', function(req, res) {
         Images.findAll({
             raw: true,
-            order: [
-                ['id', 'desc']
-            ]
+            order: [['id', 'desc']]
         }).then(images => res.json(images));
     });
 
