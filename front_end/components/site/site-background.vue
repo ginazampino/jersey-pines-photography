@@ -38,7 +38,7 @@ export default {
 
     async onChangeBackground() {
       // Get a new random image from the server:
-      const randomImage = (await axios.get("/api/random-image"))[0];
+      const randomImage = (await axios.get("/api/random-image")).data[0];
 
       // Begin the fade out sequence for existing image(s):
       this.backgroundImages.forEach(img => this.fadeOutImage(img));
