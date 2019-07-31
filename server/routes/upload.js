@@ -44,6 +44,7 @@ async function uploadImage(id, buffer, profile) {
     buffer = await sharp(buffer)
         .resize(profile.width, profile.height, { fit: 'inside' })
         .jpeg({ quality: profile.quality })
+        .withMetadata()
         .toBuffer();
 
     const key = `${config.storage.rootPath}/${id}/${profile.key.toLowerCase()}.jpg`;
