@@ -1,5 +1,5 @@
 .site-background {
-    background-image: url('/static_content/images/main-bg.jpg');
+    // background-image: url('/static_content/images/main-bg.jpg');
     background-position: center;
     background-size: cover;
     bottom: 0;
@@ -9,4 +9,25 @@
     top: 0;
     z-index: -9999;
     transition: .2s background ease-in-out;
+}
+
+.site-background-image {
+    background-position: center;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -9999;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.site-background-image.show {
+    opacity: 1 !important;
+}
+
+.site-background-image.fade {
+    opacity: 0 !important;
 }
