@@ -1,5 +1,5 @@
 const path = require('path');
-const { Categories, Images, ImageExifs } = require('../db.js');
+const { Categories, Images, ImageExifs, sequelize } = require('../db.js');
 const { Op } = require('sequelize');
 
 const config = require('../config');
@@ -13,6 +13,21 @@ module.exports = function(app) {
 
     app.get('/api/categories', function(req, res) {
         Categories.findAll({}).then(categories => res.json(categories));
+    });
+
+    app.get('/api/random-image', function(req, res) {
+        let last_image = req.query.last_image || '';
+        last_image = last_image.replace(/[^\d]/g, '');
+        if (!last_image) last_image = '-1';
+        const sql = `
+            SELECT      *
+            FROM        images
+            WHERE       id <> ${last_image}
+            ORDER BY    RAND()
+            LIMIT       1;
+        `;
+
+        sequelize.query(sql, { model: Images }).then(results => res.json(results));
     });
 
     app.get('/api/gallery/:galleryName', function(req, res) {
