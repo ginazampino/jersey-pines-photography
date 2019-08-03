@@ -96,7 +96,7 @@ module.exports = function createAuthenticatedRoutes() {
             if (!id) return res.status(ERR_BAD_REQUEST).json({ err: 'id is required.' });
 
             await Images.destroy({
-                where: { id }
+                where: { unique_id: id }
             });
 
             res.json({});
