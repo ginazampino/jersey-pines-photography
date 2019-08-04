@@ -77,11 +77,16 @@ function fixCameraMakeModel(make, model) {
     if (make === 'NIKON CORPORATION' && /^NIKON/i.test(model)) {
         return [null, model];
     }
+    if (typeof make === 'string') make = make.replace(/\0/g, '');
+    if (typeof model === 'string') model = model.replace(/\0/g, '');
     return [make, model];
 }
 
 function fixLensMakeModel(makeModel) {
-    return makeModel.replace(/\.\d+/g, '').replace(/(\d) +mm/g, function(_, number) {
-        return number + 'mm';
-    });
+    return makeModel
+        .replace(/\.\d+/g, '')
+        .replace(/(\d) +mm/g, function(_, number) {
+            return number + 'mm';
+        })
+        .replace(/\0/g, '');
 }
