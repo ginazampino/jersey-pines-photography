@@ -38,6 +38,10 @@
     padding: 25px;
 }
 
+.lightbox-details ul {
+    max-width: 400px;
+}
+
 .lightbox-details-title {
     font-size: $font-size-normal;
     margin-bottom: 5px;
@@ -49,8 +53,13 @@
     margin-bottom: 10px;
 }
 
-.lightbox-details-note {
+.lightbox-details-note,
+.lightbox-details-exif {
     color: rgba($color-gray, .55);
     font-size: $font-size-small;
     font-style: oblique;
+}
+
+.lightbox-details-exif {
+    margin-top: 10px;
 }
